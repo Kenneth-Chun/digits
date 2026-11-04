@@ -35,6 +35,8 @@ async function main() {
       },
     });
   }
+  for (const contact of config.defaultContacts) {
+    console.log(`  Adding contact: ${contact.firstName} ${contact.lastName}`);
     await prisma.contact.upsert({
       where: { id: config.defaultContacts.indexOf(contact) + 1 },
       update: {},
@@ -42,6 +44,8 @@ async function main() {
         firstName: contact.firstName,
         lastName: contact.lastName,
         address: contact.address,
+        image: contact.image,
+        description: contact.description,
         owner: contact.owner,
       },
     });
