@@ -8,7 +8,7 @@ const StuffItem = ({ name, quantity, condition, id }: Stuff) => (
     <td>{quantity}</td>
     <td>{condition}</td>
     <td>
-      <Link href={`/edit/${id}`}>Edit</Link>
+      <Link href={`/edit/stuff/${id}`}>Edit</Link>
     </td>
   </tr>
 );

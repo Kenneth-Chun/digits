@@ -8,7 +8,7 @@ const StuffItemAdmin = ({ name, quantity, condition, owner, id }: Stuff) => (
     <td>{condition}</td>
     <td>{owner}</td>
     <td>
-      <a href={`/edit/${id}`}>Edit</a>
+      <a href={`/edit/stuff/${id}`}>Edit</a>
     </td>
   </tr>
 );
