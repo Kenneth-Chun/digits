@@ -131,6 +131,21 @@ export async function addContact(contact: {
   redirect('/list');
 }
 
+export async function addNote(note: {
+  note: string;
+  contactId: number;
+  owner: string;
+}) {
+  await prisma.note.create({
+    data: {
+      note: note.note,
+      contactId: note.contactId,
+      owner: note.owner,
+    },
+  });
+  redirect('/list');
+}
+
 export async function editContact(contact: Contact) {
   // console.log(`editContact data: ${JSON.stringify(contact, null, 2)}`);
   await prisma.contact.update({
