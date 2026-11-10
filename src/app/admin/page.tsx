@@ -1,6 +1,5 @@
 import { Col, Container, Row, Table } from 'react-bootstrap';
 import ContactCardAdmin from '@/components/ContactCardAdmin';
-import StuffItemAdmin from '@/components/StuffItemAdmin';
 import { prisma } from '@/lib/prisma';
 import { adminProtectedPage } from '@/lib/page-protection';
 import { auth } from '@/lib/auth';
@@ -14,7 +13,6 @@ const AdminPage = async () => {
   );
   const contacts = await prisma.contact.findMany({});
   const notes = await prisma.note.findMany({});
-  const stuff = await prisma.stuff.findMany({});
   const users = await prisma.user.findMany({});
 
   return (
@@ -33,27 +31,6 @@ const AdminPage = async () => {
                 </Col>
               ))}
             </Row>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <h1>List Stuff Admin</h1>
-            <Table striped bordered hover>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Quantity</th>
-                  <th>Condition</th>
-                  <th>Owner</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {stuff.map((item) => (
-                  <StuffItemAdmin key={item.id} {...item} />
-                ))}
-              </tbody>
-            </Table>
           </Col>
         </Row>
         <Row>

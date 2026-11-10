@@ -17,7 +17,7 @@ const Home = () => (
         <Col>
           <FileEarmarkTextFill size={100} />
           <h1>Contact Details</h1>
-          <h5>For each contact, you can save their name, address, and phone number.</h5>
+          <h5>For each contact, you can save their name, address, image, and a description.</h5>
         </Col>
         <Col>
           <Calendar2CheckFill size={100} />
@@ -33,5 +33,4 @@ const Home = () => (
 );
 
 export default Home;
-
 

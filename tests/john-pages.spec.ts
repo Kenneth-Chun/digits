@@ -1,33 +1,18 @@
 import { test, expect } from './auth-utils';
 
 test.slow();
-test('can authenticate a specific user', async ({ getUserPage }) => {
+test('John can view his contacts', async ({ getUserPage }) => {
+  const johnPage = await getUserPage('john@foo.com', 'changeme');
 
-  // Call the getUserPage fixture with users signin info to get authenticated session for user
-  const customUserPage = await getUserPage('john@foo.com', 'changeme');
+  await johnPage.goto('http://localhost:3000/');
+  await expect(johnPage.getByRole('button', { name: 'john@foo.com' })).toBeVisible({
+    timeout: 10000,
+  });
+  await expect(johnPage.getByRole('link', { name: 'Add Contact' })).toBeVisible();
+  await expect(johnPage.getByRole('link', { name: 'List Contacts' })).toBeVisible();
 
-  // Navigate to the home page and wait for post-login indicator
-  await customUserPage.goto('http://localhost:3000/');
-  await expect(
-    customUserPage.getByRole('button', { name: 'john@foo.com' })
-  ).toBeVisible({ timeout: 10000 });
-
-  // Now check for navigation links and headings
-  await expect(
-    customUserPage.getByRole('link', { name: 'Add Stuff' })
-  ).toBeVisible({ timeout: 5000 });
-  await expect(
-    customUserPage.getByRole('link', { name: 'List Stuff' })
-  ).toBeVisible({ timeout: 5000 });
-
-  await customUserPage.getByRole('link', { name: 'Add Stuff' }).click();
-  await expect(
-    customUserPage.getByRole('heading', { name: 'Add Stuff' })
-  ).toBeVisible({ timeout: 5000 });
-
-  await customUserPage.getByRole('link', { name: 'List Stuff' }).click();
-  await expect(
-    customUserPage.getByRole('heading', { name: 'Stuff' })
-  ).toBeVisible({ timeout: 5000 });
-
+  await johnPage.getByRole('link', { name: 'List Contacts' }).click();
+  await expect(johnPage.getByRole('heading', { name: 'List Contacts' })).toBeVisible();
+  await expect(johnPage.getByText('Philip Johnson')).toBeVisible();
+  await expect(johnPage.getByText('Henri Casanova')).toBeVisible();
 });
