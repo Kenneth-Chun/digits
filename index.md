@@ -1,8 +1,8 @@
-<img src="doc/landing.png" alt="Digits contact manager landing page">
+<img src="doc/landing.png" alt="Digits Contact Manager landing page">
 
 # Digits Contact Manager
 
-Digits is a contact manager for keeping personal contact details and timestamped notes. Each account sees its own contacts; administrators can review all contacts and registered users.
+Digits is a contact manager for keeping contact details and timestamped notes. Each account sees its own contacts, while administrators can review all contacts and registered users.
 
 ## Installation
 
@@ -13,28 +13,28 @@ Digits is a contact manager for keeping personal contact details and timestamped
 
 ### Setup
 
-1. Install dependencies:
+1. Install the project dependencies from the repository root:
 
    ```sh
    npm install
    ```
 
-2. Create a PostgreSQL database (the example uses `digits`):
+2. Create a PostgreSQL database for the app. This example names it `digits`:
 
    ```sh
    createdb digits
    ```
 
-3. Copy `sample.env` to `.env` and set `DATABASE_URL` to connect to the database. Set `AUTH_SECRET` to a private random value and keep `.env` out of source control.
+3. Copy `sample.env` to `.env`. Update `DATABASE_URL` with your PostgreSQL connection details and set `AUTH_SECRET` to a private random value. Do not commit `.env`.
 
-4. Create the database tables and seed the sample accounts and contacts:
+4. Create the database tables and load the development sample accounts and contacts:
 
    ```sh
    npx prisma migrate dev
    npm run seed
    ```
 
-   The development seed includes `john@foo.com` and `admin@foo.com`; both use the password `changeme`.
+   The seed includes `john@foo.com` and `admin@foo.com` (password: `changeme`). These are development credentials; do not use them in a deployed environment.
 
 5. Start the development server:
 
@@ -46,16 +46,16 @@ Digits is a contact manager for keeping personal contact details and timestamped
 
 ## Pages
 
-- **Home (`/`)** — introduces Digits and its contact-management features.
-- **Sign in (`/auth/signin`)** — authenticate with an existing account.
-- **Sign up (`/auth/signup`)** — register an account.
-- **Add Contact (`/add`)** — save a contact's name, address, image, and description.
-- **List Contacts (`/list`)** — view and edit your contacts, add timestamped notes, and review each contact's notes.
-- **Edit Contact (`/edit/contact/[id]`)** — update a contact's details.
-- **Admin (`/admin`)** — administrators can review all contacts and registered users.
-- **Change Password (`/auth/change-password`)** — update the password for the signed-in account.
-- **Sign out (`/auth/signout`)** — end the current session.
-- **Not authorized (`/not-authorized`)** — shown when an account lacks permission for a restricted page.
+- **Home (`/`)** — introduces the contact manager's multiple-user access, contact details, and timestamped notes. Use the Login menu to sign in or register.
+- **Sign in (`/auth/signin`)** — authenticate with an existing account to open your contact list.
+- **Sign up (`/auth/signup`)** — create an account with an email and password; new accounts can then add their own contacts.
+- **Add Contact (`/add`)** — save a contact's name, address, image URL, and description.
+- **List Contacts (`/list`)** — view the contacts belonging to your account. From a contact, edit its details or add and review notes with timestamps.
+- **Edit Contact (`/edit/contact/[id]`)** — update a contact's saved details.
+- **Admin (`/admin`)** — available to administrators; displays all contacts and a table of registered users and roles.
+- **Change Password (`/auth/change-password`)** — verify and change the password for the signed-in account.
+- **Sign out (`/auth/signout`)** — confirm signing out or cancel and return to the app.
+- **Not authorized (`/not-authorized`)** — explains that the current account does not have permission to access a restricted page.
 
 ## Development
 
